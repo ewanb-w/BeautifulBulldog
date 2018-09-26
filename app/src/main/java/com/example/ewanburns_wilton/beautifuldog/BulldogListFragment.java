@@ -42,8 +42,8 @@ public class BulldogListFragment extends Fragment {
 
 
         Bulldog bulldog2 = new Bulldog();
-        bulldog1.setAge("1");
-        bulldog1.setName("Marley");
+        bulldog2.setAge("1");
+        bulldog2.setName("Marley");
 
         bulldogs.add(bulldog1);
         bulldogs.add(bulldog2);
