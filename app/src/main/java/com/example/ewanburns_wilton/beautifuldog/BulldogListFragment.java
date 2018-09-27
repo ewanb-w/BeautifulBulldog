@@ -1,6 +1,7 @@
 package com.example.ewanburns_wilton.beautifuldog;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -17,9 +18,12 @@ import java.util.ArrayList;
  */
 public class BulldogListFragment extends Fragment {
 
-    private RecyclerView bulldogList;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter bulldogAdapter;
+    private RecyclerView bulldogList;
+
+//    final BulldogArrayAdapter adapter = new BulldogArrayAdapter(this, bulldogs);
+//    bulldogList.setAdapter(adapter);
 
     public BulldogListFragment() {
         // Required empty public constructor
@@ -33,17 +37,16 @@ public class BulldogListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_bulldog_list, container, false);
 
-        ArrayList<Bulldog> bulldogs = new ArrayList<Bulldog>();
+        final ArrayList<Bulldog> bulldogs = new ArrayList<Bulldog>();
         bulldogList = (RecyclerView)view.findViewById(R.id.bulldog_list);
 
         Bulldog bulldog1 = new Bulldog();
         bulldog1.setAge("10");
         bulldog1.setName("Ruby");
 
-
         Bulldog bulldog2 = new Bulldog();
-        bulldog1.setAge("1");
-        bulldog1.setName("Marley");
+        bulldog2.setAge("1");
+        bulldog2.setName("Marley");
 
         bulldogs.add(bulldog1);
         bulldogs.add(bulldog2);
@@ -51,7 +54,17 @@ public class BulldogListFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         bulldogList.setLayoutManager(layoutManager);
 
-        bulldogAdapter = new BulldogAdapter(getContext(), bulldogs);
+        RecyclerViewClickListener listener = new RecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Bulldog bulldog = (Bulldog) bulldogs.get(position);
+                Intent intent = new Intent(view.getContext(), BulldogActivity.class);
+                intent.putExtra("bulldog", (Serializable) bulldog);
+                startActivity(intent);
+            }
+        };
+
+        bulldogAdapter = new BulldogAdapter(getContext(), bulldogs, listener);
         bulldogList.setAdapter(bulldogAdapter);
 
         return view;
