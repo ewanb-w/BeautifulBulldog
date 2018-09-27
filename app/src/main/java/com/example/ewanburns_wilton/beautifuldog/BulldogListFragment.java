@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import java.io.Serializable;
-import java.util.ArrayList;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 
 /**
@@ -37,7 +37,8 @@ public class BulldogListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_bulldog_list, container, false);
 
-        final ArrayList<Bulldog> bulldogs = new ArrayList<Bulldog>();
+        Realm realm = Realm.getDefaultInstance();
+        final RealmResults<Bulldog> bulldogs = realm.where(Bulldog.class).findAll();
         bulldogList = (RecyclerView)view.findViewById(R.id.bulldog_list);
 
         Bulldog bulldog1 = new Bulldog();
@@ -59,7 +60,7 @@ public class BulldogListFragment extends Fragment {
             public void onClick(View view, int position) {
                 Bulldog bulldog = (Bulldog) bulldogs.get(position);
                 Intent intent = new Intent(view.getContext(), BulldogActivity.class);
-                intent.putExtra("bulldog", (Serializable) bulldog);
+                intent.putExtra("bulldog", bulldog.getId());
                 startActivity(intent);
             }
         };
