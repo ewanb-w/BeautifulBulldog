@@ -41,17 +41,6 @@ public class BulldogListFragment extends Fragment {
         final RealmResults<Bulldog> bulldogs = realm.where(Bulldog.class).findAll();
         bulldogList = (RecyclerView)view.findViewById(R.id.bulldog_list);
 
-        Bulldog bulldog1 = new Bulldog();
-        bulldog1.setAge("10");
-        bulldog1.setName("Ruby");
-
-        Bulldog bulldog2 = new Bulldog();
-        bulldog2.setAge("1");
-        bulldog2.setName("Marley");
-
-        bulldogs.add(bulldog1);
-        bulldogs.add(bulldog2);
-
         layoutManager = new LinearLayoutManager(getContext());
         bulldogList.setLayoutManager(layoutManager);
 
