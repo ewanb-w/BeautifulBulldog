@@ -8,7 +8,8 @@ import io.realm.Realm;
 
 public class BulldogActivity extends AppCompatActivity {
 
-    private TextView textView;
+    private TextView nameField;
+    private TextView ageField;
     private Realm realm;
 
     @Override
@@ -16,10 +17,12 @@ public class BulldogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bulldog);
 
-        textView = (TextView) findViewById(R.id.textView);
+        nameField = (TextView) findViewById(R.id.name_field);
+        ageField = (TextView) findViewById(R.id.age_field);
         realm = Realm.getDefaultInstance();
         String id = (String) getIntent().getStringExtra("bulldog");
         Bulldog bulldog = realm.where(Bulldog.class).equalTo("id", id).findFirst();
-        textView.setText(bulldog.getName());
+        nameField.setText(bulldog.getName());
+        ageField.setText(bulldog.getAge());
     }
 }
