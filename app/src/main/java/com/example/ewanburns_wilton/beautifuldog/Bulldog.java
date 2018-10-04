@@ -43,4 +43,7 @@ public class Bulldog extends RealmObject {
     public void setAge(String age) {
         this.age = age;
     }
+
+    public void setImage() {
+    }
 }

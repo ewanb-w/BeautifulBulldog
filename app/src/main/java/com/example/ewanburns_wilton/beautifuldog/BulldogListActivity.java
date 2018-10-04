@@ -12,9 +12,5 @@ public class BulldogListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bulldog_list);
-//        textView = (TextView) findViewById(R.id.);
-//
-//        String email = getIntent().getStringExtra("email");
-//        textView.setText(email);
     }
 }
